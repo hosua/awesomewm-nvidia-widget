@@ -528,6 +528,18 @@ local function worker(input)
 		)
 	end
 
+	awful.tooltip({
+		objects			 = { widget },
+		bg				  = _config.popup_bg,
+		border_color		= _config.popup_border_color,
+		border_width		= 1,
+		font				= "Terminus 9",
+		mode				= "outside",
+		preferred_positions = { "bottom", "top" },
+		delay_show		  = 0.5,
+		text				= "Left: GPU details popup",
+	})
+
 	widget:buttons(awful.util.table.join(awful.button({}, 1, function()
 		if popup.visible then
 			popup.visible = false
