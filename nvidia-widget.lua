@@ -531,6 +531,7 @@ local function worker(input)
 	awful.tooltip({
 		objects			 = { widget },
 		bg				  = _config.popup_bg,
+		fg				  = "#FEFEFE",
 		border_color		= _config.popup_border_color,
 		border_width		= 1,
 		font				= "Terminus 9",
