@@ -538,7 +538,7 @@ local function worker(input)
 		mode				= "outside",
 		preferred_positions = { "bottom", "top" },
 		delay_show		  = 0.5,
-		text				= "GPU details popup",
+		text				= "Show GPU details",
 	})
 
 	widget:buttons(awful.util.table.join(awful.button({}, 1, function()
