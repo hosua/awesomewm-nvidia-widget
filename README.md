@@ -27,6 +27,10 @@ nvidia_widget({
     show_power = true,
     show_vram = true,
     show_arc = true,
+    arc_bg = "#ffffff11",        -- arc background rings
+    arc_color = nil,             -- arc foreground (default: beautiful.fg_normal)
+    popup_fg = nil,              -- popup text (default: beautiful.fg_normal)
+    icon_color = nil,            -- recolor gpu.svg (e.g. "#333333" for light bars)
 })
 ```
 

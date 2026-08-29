@@ -22,6 +22,8 @@ local config = {
 	show_power = true,
 	show_vram = true,
 	show_arc = true,
+	arc_bg = "#ffffff11",
+	icon_color = nil, -- recolor gpu.svg (nil = keep its own colors)
 }
 
 local function worker(input)
@@ -37,6 +39,10 @@ local function worker(input)
 			_config[prop] = value
 		end
 	end
+	_config.icon_color = args.icon_color
+	-- Theme-derived defaults resolve at call time, not in the static table.
+	_config.arc_color = args.arc_color or beautiful.fg_normal or "#FEFEFE"
+	_config.popup_fg = args.popup_fg or beautiful.fg_normal or "#D8DEE9"
 
 	local stats = {
 		temp = nil,
@@ -55,7 +61,10 @@ local function worker(input)
 
 	local widget_dir = debug.getinfo(1, "S").source:match("^@(.+/)[^/]+$")
 	local gpu_icon = wibox.widget.imagebox()
-	gpu_icon:set_image(widget_dir .. "gpu.svg")
+	local gpu_icon_path = widget_dir .. "gpu.svg"
+	gpu_icon:set_image(_config.icon_color
+		and gears.color.recolor_image(gpu_icon_path, _config.icon_color)
+		or gpu_icon_path)
 	gpu_icon.resize = true
 	gpu_icon.forced_width = 18
 	gpu_icon.forced_height = 18
@@ -74,9 +83,9 @@ local function worker(input)
 		forced_height = 18,
 		forced_width = 18,
 		rounded_edge = true,
-		bg = "#ffffff11",
+		bg = _config.arc_bg,
 		paddings = 0,
-		colors = { beautiful.fg_normal or "#FEFEFE" },
+		colors = { _config.arc_color },
 		widget = wibox.container.arcchart,
 	})
 
@@ -87,9 +96,9 @@ local function worker(input)
 		forced_height = 18,
 		forced_width = 18,
 		rounded_edge = true,
-		bg = "#ffffff11",
+		bg = _config.arc_bg,
 		paddings = 0,
-		colors = { beautiful.fg_normal or "#FEFEFE" },
+		colors = { _config.arc_color },
 		widget = wibox.container.arcchart,
 	})
 
@@ -228,9 +237,9 @@ local function worker(input)
 			forced_height = 14,
 			forced_width = 14,
 			rounded_edge = true,
-			bg = "#ffffff11",
+			bg = _config.arc_bg,
 			paddings = 0,
-			colors = { beautiful.fg_normal or "#FEFEFE" },
+			colors = { _config.arc_color },
 			widget = wibox.container.arcchart,
 		})
 		popup_power_arc.value = power_percent
@@ -280,9 +289,9 @@ local function worker(input)
 			forced_height = 14,
 			forced_width = 14,
 			rounded_edge = true,
-			bg = "#ffffff11",
+			bg = _config.arc_bg,
 			paddings = 0,
-			colors = { beautiful.fg_normal or "#FEFEFE" },
+			colors = { _config.arc_color },
 			widget = wibox.container.arcchart,
 		})
 		popup_mem_arc.value = mem_percent
@@ -429,7 +438,7 @@ local function worker(input)
 						border_width = 1,
 						border_color = _config.popup_border_color,
 						bg = _config.popup_bg,
-						fg = beautiful.fg_normal or "#D8DEE9",
+						fg = _config.popup_fg,
 						maximum_width = tooltip_width,
 						offset = { y = 5 },
 						widget = tooltip_widget,
@@ -484,8 +493,8 @@ local function worker(input)
 			function(process_stdout, process_stderr, process_exitreason, process_exitcode)
 				if process_exitcode == 0 and process_stdout and process_stdout ~= "" then
 					local processes = {}
-					for line in process_stdout:gmatch("[^\r\n]+") do
-						line = line:gsub("^%s+", ""):gsub("%s+$", "")
+					for raw_line in process_stdout:gmatch("[^\r\n]+") do
+						local line = raw_line:gsub("^%s+", ""):gsub("%s+$", "")
 						if line and line ~= "" then
 							table.insert(processes, line)
 						end
