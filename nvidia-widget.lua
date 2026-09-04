@@ -537,7 +537,6 @@ local function worker(input)
 		font				= "Terminus 14",
 		mode				= "outside",
 		preferred_positions = { "bottom", "top" },
-		delay_show		  = 0,
 		text				= "Show GPU details",
 	})
 
