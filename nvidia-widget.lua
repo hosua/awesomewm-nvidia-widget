@@ -530,11 +530,11 @@ local function worker(input)
 
 	awful.tooltip({
 		objects			 = { widget },
-		bg				  = _config.popup_bg,
-		fg				  = "#FEFEFE",
-		border_color		= _config.popup_border_color,
+		bg				  = beautiful.tooltip_bg or _config.popup_bg,
+		fg				  = beautiful.tooltip_fg or "#FEFEFE",
+		border_color		= beautiful.tooltip_border_color or _config.popup_border_color,
 		border_width		= 1,
-		font				= "Terminus 14",
+		font				= beautiful.tooltip_font or "Terminus 14",
 		mode				= "outside",
 		preferred_positions = { "bottom", "top" },
 		text				= "Show GPU details",
