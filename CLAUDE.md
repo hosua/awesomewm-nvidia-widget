@@ -1,18 +1,11 @@
 # nvidia-widget
 
-## AwesomeWM API docs — use the local mirror, not the website
+## AwesomeWM API docs
 
-Do NOT look up AwesomeWM API documentation on awesomewm.org by default. This
-repo is checked out as a submodule of `awesomewm-config`, which carries a
-condensed local mirror at `../../.claude-docs/` (relative to this repo root):
-
-- Start at `../../.claude-docs/00-INDEX.md` — a TOC mirroring
-  <https://awesomewm.org/apidoc/> with local paths and upstream URLs.
-- Coverage: all `awful.*` and `wibox.*`, `beautiful`, `gears.color`/`gears.shape`,
-  core objects, and the documentation guides.
-- Search it with `rg -i 'keyword' ../../.claude-docs/` before reasoning from memory.
-- Only fetch awesomewm.org for pages the index marks as not mirrored, or when a
-  local page looks stale — and fix the local page when that happens.
+Local mirror, not awesomewm.org (this repo is a submodule of `awesomewm-config`):
+check `../../.claude-docs/CHEATSHEET.md` first, grep full pages only when that's
+not enough. Lookup protocol in `../../.claude-docs/README.md`; TOC in
+`../../.claude-docs/00-INDEX.md`.
 
 ## Icon color rule
 
