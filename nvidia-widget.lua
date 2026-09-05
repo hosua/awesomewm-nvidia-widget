@@ -198,6 +198,9 @@ local function worker(input)
 		widget = {},
 	})
 
+	-- clicking anywhere off the popup (app window or desktop) dismisses it
+	dofile(widget_dir .. "popup-click-off.lua").attach(popup)
+
 	local function format_temp(celsius)
 		if not celsius then
 			return "N/A"

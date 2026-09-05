@@ -35,3 +35,13 @@ nvidia_widget({
 ```
 
 On machines without an NVIDIA GPU, omit this widget from your wibar.
+
+## Click-off dismissal
+
+Clicking anywhere off the open popup — an app window or the desktop —
+closes it without swallowing the click, and opening another widget's
+popup closes this one. Clicks landing on the wibar itself can't be
+observed by a widget in AwesomeWM v4.3 and leave the popup open
+(clicking the widget's own icon still toggles it). Implemented by
+`popup-click-off.lua`, a copy shared and kept in sync across all the
+widget repos.
